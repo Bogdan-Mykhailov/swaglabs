@@ -7,13 +7,14 @@ import { convertStringToNumber } from '../utils/helpers';
 import { CHECKOUT_COMPLETE_DATA } from '../../testData/checkoutCompletePage.data';
 
 test.describe('Complete checkout flow',
+  { tag: '@e2e' },
   () => {
 
     test.beforeEach(async ({ loginPage }) => {
       await loginPage.openLoginPage();
     });
 
-    test('Should successfully complete checkout flow', { tag: '@TC006' }, async (
+    test('Should successfully complete checkout flow', { tag: ['@e2e', '@TC006'] }, async (
       {
         page,
         loginPage,
@@ -153,10 +154,22 @@ test.describe('Complete checkout flow',
       });
     });
 
-    // todo update test scenario
-    test('Fill login form using invalid data', { tag: '@TC007' }, async ({ loginPage }) => {
+    test('Should show error and prevent login for locked out user', { tag: ['@e2e', '@TC007'] }, async ({ loginPage }) => {
       await testStep('Fill login form using locked user credentials', async () => {
-        await loginPage.loginFormComponent.loginWithCredentials(USER_CREDENTIALS.locked_out, process.env.TEST_USER_PASSWORD);
+        await loginPage.loginFormComponent.fillUserNameField(USER_CREDENTIALS.locked_out);
+        await loginPage.loginFormComponent.fillPasswordField(process.env.TEST_USER_PASSWORD);
+      });
+
+      await testStep('Verify that login button is enabled', async () => {
+        await expect(loginPage.loginFormComponent.loginButton).toBeEnabled();
+      });
+
+      await testStep('Click Login button', async () => {
+        await loginPage.loginFormComponent.loginButton.click();
+      });
+
+      await testStep('Verify that user stays on login page', async () => {
+        await expect(loginPage.page, 'User should stay on login page').not.toHaveURL(/inventory\.html/);
       });
 
       await testStep('Verify error message is displayed', async () => {
@@ -164,6 +177,31 @@ test.describe('Complete checkout flow',
           'The error message should be visible').toBeVisible();
         await expect(loginPage.loginFormComponent.errorText,
           `The error message should contain text: ${LOGIN_PAGE_DATA.lockedUserErrorMessage}`).toContainText(LOGIN_PAGE_DATA.lockedUserErrorMessage);
+      });
+    });
+
+    test('Verify ability to logout', { tag: ['@e2e', '@TC008'] }, async ({ page, loginPage, inventoryPage }) => {
+      await testStep('Login to the application using valid credentials', async () => {
+        await loginPage.loginFormComponent.loginWithCredentials(USER_CREDENTIALS.standard, process.env.TEST_USER_PASSWORD);
+      });
+
+      await testStep('Open sidebar menu', async () => {
+        await inventoryPage.verifyElementVisibility(inventoryPage.header.menuButton, 'The menu button should be visible');
+        await inventoryPage.header.menuButton.click();
+      });
+
+      await testStep('Verify sidebar menu displayed', async () => {
+        await inventoryPage.verifyElementVisibility(
+          inventoryPage.header.sidebarMenuComponent.sidebarMenu,
+          'The sidebar menu should be visible');
+      });
+
+      await testStep('Click Logout button', async () => {
+        await inventoryPage.header.sidebarMenuComponent.logoutLink.click();
+      });
+
+      await testStep('Verify that user was redirected to the login page', async () => {
+        await expect(page, 'The user should be redirected to the login page').toHaveURL('https://www.saucedemo.com/');
       });
     });
   });
