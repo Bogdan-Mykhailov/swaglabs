@@ -15,19 +15,19 @@ test.describe('Verify Inventory Item Component',
       { tag: ['@TC005'] },
       async ({ inventoryPage }) => {
         await testStep('Verify that all elements is visible', async () => {
-          await inventoryPage.verifyElementsVisibility(
+          await inventoryPage.verifyElementVisibility(
             inventoryPage.inventoryComponent.inventoryItemPhoto.first(),
             'The inventory item photo should be visible');
-          await inventoryPage.verifyElementsVisibility(
+          await inventoryPage.verifyElementVisibility(
             inventoryPage.inventoryComponent.inventoryItemTitle.first(),
             'The inventory item title should be visible');
-          await inventoryPage.verifyElementsVisibility(
+          await inventoryPage.verifyElementVisibility(
             inventoryPage.inventoryComponent.inventoryItemDescription.first(),
             'The inventory item description should be visible');
-          await inventoryPage.verifyElementsVisibility(
+          await inventoryPage.verifyElementVisibility(
             inventoryPage.inventoryComponent.inventoryItemPrice.first(),
             'The inventory item price should be visible');
-          await inventoryPage.verifyElementsVisibility(
+          await inventoryPage.verifyElementVisibility(
             inventoryPage.inventoryComponent.inventoryItemButton.first(),
             'The inventory item button should be visible');
         });
@@ -38,7 +38,7 @@ test.describe('Verify Inventory Item Component',
           await expect(inventoryPage.inventoryComponent.inventoryItemDescription.first(),
             `The inventory item description should have text: ${INVENTORY_ITEM_DATA.description}`).toHaveText(INVENTORY_ITEM_DATA.description);
           await expect(inventoryPage.inventoryComponent.inventoryItemPrice.first(),
-            `The inventory item price should have text: ${INVENTORY_ITEM_DATA.price}`).toHaveText(INVENTORY_ITEM_DATA.price);
+            `The inventory item price should be: ${INVENTORY_ITEM_DATA.price}`).toHaveText(INVENTORY_ITEM_DATA.price);
         });
       });
   });

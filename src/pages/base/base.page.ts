@@ -7,7 +7,7 @@ export class BasePage extends BaseComponentPage {
     return this.page.goto(pagePath);
   }
 
-  async verifyElementsVisibility(locator: Locator, errorMessage: string): Promise<void> {
+  async verifyElementVisibility(locator: Locator, errorMessage: string): Promise<void> {
     await expect(locator, errorMessage).toBeVisible();
   }
 }
