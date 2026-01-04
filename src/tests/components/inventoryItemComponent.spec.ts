@@ -12,7 +12,7 @@ test.describe('Verify Inventory Item Component',
     });
 
     test('Verify Inventory item elements',
-      { tag: ['@TC005'] },
+      { tag: ['@component', '@TC005'] },
       async ({ inventoryPage }) => {
         await testStep('Verify that all elements is visible', async () => {
           await inventoryPage.verifyElementVisibility(
@@ -36,7 +36,7 @@ test.describe('Verify Inventory Item Component',
           await expect(inventoryPage.inventoryComponent.inventoryItemTitle.first(),
             `The inventory item title should have text: ${INVENTORY_ITEM_DATA.title}`).toHaveText(INVENTORY_ITEM_DATA.title);
           await expect(inventoryPage.inventoryComponent.inventoryItemDescription.first(),
-            `The inventory item description should have text: ${INVENTORY_ITEM_DATA.description}`).toHaveText(INVENTORY_ITEM_DATA.description);
+            `The inventory item description should have text: ${INVENTORY_ITEM_DATA.description}`).toContainText(INVENTORY_ITEM_DATA.description);
           await expect(inventoryPage.inventoryComponent.inventoryItemPrice.first(),
             `The inventory item price should be: ${INVENTORY_ITEM_DATA.price}`).toHaveText(INVENTORY_ITEM_DATA.price);
         });

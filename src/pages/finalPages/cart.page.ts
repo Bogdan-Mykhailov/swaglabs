@@ -1,6 +1,6 @@
-import { BasePage } from './base/base.page';
-import { HeaderComponentPage } from './componentPages/headerComponent.page';
-import { CartItemComponentPage } from './componentPages/cartItemComponent.page';
+import { BasePage } from '../base/base.page';
+import { HeaderComponentPage } from '../componentPages/headerComponent.page';
+import { CartItemComponentPage } from '../componentPages/cartItemComponent.page';
 
 export class CartPage extends BasePage {
   readonly header: HeaderComponentPage = new HeaderComponentPage(this.page);

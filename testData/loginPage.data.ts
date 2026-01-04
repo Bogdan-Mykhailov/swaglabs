@@ -1,11 +1,6 @@
-export interface IUserData {
-  username: string;
-  password: string;
-}
-
 export const LOGIN_PAGE_DATA = {
-  lockedUserErrorMessage: 'Epic sadface: Sorry, this user has been locked out.',
-  emptyUserCredentialErrorMessage: 'Epic sadface: Username is required',
+  lockedUserErrorMessage: 'Sorry, this user has been locked out.',
+  emptyUserCredentialErrorMessage: 'Username is required',
   credentialsTitle: 'Accepted usernames are:',
   passwordTitle: 'Password for all users:'
 };

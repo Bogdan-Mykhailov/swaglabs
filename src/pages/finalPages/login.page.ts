@@ -1,6 +1,6 @@
-import { BasePage } from './base/base.page';
-import { LoginFormComponentPage } from './componentPages/loginFormComponent.page';
-import { LoginCredentialsContainerPage } from './componentPages/loginCredentialsContainer.page';
+import { BasePage } from '../base/base.page';
+import { LoginFormComponentPage } from '../componentPages/loginFormComponent.page';
+import { LoginCredentialsContainerPage } from '../componentPages/loginCredentialsContainer.page';
 
 export class LoginPage extends BasePage {
   public loginFormComponent: LoginFormComponentPage = new LoginFormComponentPage(this.page);
