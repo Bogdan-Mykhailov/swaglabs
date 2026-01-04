@@ -1,7 +1,7 @@
 import { BaseComponentPage } from '../base/baseComponent.page';
 import { Locator } from '@playwright/test';
 
-export class LoginFormPage extends BaseComponentPage {
+export class LoginFormComponentPage extends BaseComponentPage {
   readonly loginForm: Locator = this.page.locator('.login_wrapper');
   readonly userNameField: Locator = this.page.locator('#user-name');
   readonly passwordField: Locator = this.page.locator('#password');
@@ -20,7 +20,7 @@ export class LoginFormPage extends BaseComponentPage {
     await locator.clear();
   }
 
-  async fillLoginForm(username: string, password: string) {
+  async loginWithCredentials(username: string, password: string) {
     await this.fillUserNameField(username);
     await this.fillPasswordField(password);
     await this.loginButton.click();

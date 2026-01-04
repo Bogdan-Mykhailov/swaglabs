@@ -12,6 +12,7 @@ const test = base.extend<WebFixtures>({
     const loginPage = new LoginPage(page);
     await use(loginPage);
   },
+
   inventoryPage: async ({ page }, use) => {
     const inventoryPage = new InventoryPage(page);
     await use(inventoryPage);

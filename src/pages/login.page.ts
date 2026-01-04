@@ -1,9 +1,9 @@
 import { BasePage } from './base/base.page';
-import { LoginFormPage } from './componentPages/loginForm.page';
+import { LoginFormComponentPage } from './componentPages/loginFormComponent.page';
 import { LoginCredentialsContainerPage } from './componentPages/loginCredentialsContainer.page';
 
 export class LoginPage extends BasePage {
-  public loginFormComponent: LoginFormPage = new LoginFormPage(this.page);
+  public loginFormComponent: LoginFormComponentPage = new LoginFormComponentPage(this.page);
   public loginCredentialsComponent: LoginCredentialsContainerPage = new LoginCredentialsContainerPage(this.page);
 
   async openLoginPage() {

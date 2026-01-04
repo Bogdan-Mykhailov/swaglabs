@@ -2,8 +2,6 @@ import { test, expect } from '../../fixtures/web.fixtures';
 import { testStep } from '../../testStepDefinition/testStep';
 import { LOGIN_PAGE_DATA, USER_CREDENTIALS } from '../../../testData/loginPage.data';
 
-test.describe.configure({ mode: 'default' });
-
 test.describe('Login Form Component Flow',
   { tag: ['@component'] },
   () => {
@@ -12,7 +10,7 @@ test.describe('Login Form Component Flow',
       await loginPage.openLoginPage();
     });
 
-    test('Verify ability to fill the form', { tag: '@CLF-001' }, async ({ loginPage }) => {
+    test('Verify ability to fill the form', { tag: ['@component', '@TC001'] }, async ({ loginPage }) => {
       await testStep('Verify form inputs visibility', async () => {
         await expect(loginPage.loginFormComponent.loginForm,
           'The login form should be visible').toBeVisible();
@@ -31,7 +29,7 @@ test.describe('Login Form Component Flow',
       });
     });
 
-    test('Submit login form with empty fields', { tag: '@CLF-002' }, async ({ loginPage }) => {
+    test('Submit login form with empty fields', { tag:['@component', '@TC002'] }, async ({ loginPage }) => {
       await testStep('Fill login form using valid data', async () => {
         await loginPage.loginFormComponent.fillUserNameField(USER_CREDENTIALS.standard);
         await loginPage.loginFormComponent.fillPasswordField(process.env.TEST_USER_PASSWORD);
@@ -55,7 +53,7 @@ test.describe('Login Form Component Flow',
       });
     });
 
-    test('Verify credentials block on the login page', { tag: '@CLF-003' }, async ({ loginPage }) => {
+    test('Verify credentials block on the login page', { tag:['@component', '@TC003'] }, async ({ loginPage }) => {
       await testStep('Verify credentials block on the login page is displayed', async () => {
         await expect(loginPage.loginCredentialsComponent.credentialsBlock,
           'The credentials block on the login page should be visible').toBeVisible();
@@ -69,7 +67,7 @@ test.describe('Login Form Component Flow',
       });
     });
 
-    test('Verify password block on the login page', { tag: '@CLF-003' }, async ({ loginPage }) => {
+    test('Verify password block on the login page', { tag:['@component', '@TC004'] }, async ({ loginPage }) => {
       await testStep('Verify password block on the login page is displayed', async () => {
         await expect(loginPage.loginCredentialsComponent.passwordBlock,
           'The password block on the login page should be visible').toBeVisible();

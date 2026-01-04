@@ -17,7 +17,7 @@ test.describe('Verify login flow',
       });
 
       await testStep('Fill login form using valid data', async () => {
-        await loginPage.loginFormComponent.fillLoginForm(USER_CREDENTIALS.standard, process.env.TEST_USER_PASSWORD);
+        await loginPage.loginFormComponent.loginWithCredentials(USER_CREDENTIALS.standard, process.env.TEST_USER_PASSWORD);
       });
 
       await testStep('Verify successful login by checking URL', async () => {
@@ -27,7 +27,7 @@ test.describe('Verify login flow',
 
     test('Fill login form using invalid data', { tag: '@LF_002' }, async ({ loginPage }) => {
       await testStep('Fill login form using locked user credentials', async () => {
-        await loginPage.loginFormComponent.fillLoginForm(USER_CREDENTIALS.locked_out, process.env.TEST_USER_PASSWORD);
+        await loginPage.loginFormComponent.loginWithCredentials(USER_CREDENTIALS.locked_out, process.env.TEST_USER_PASSWORD);
       });
 
       await testStep('Verify error message is displayed', async () => {
@@ -36,9 +36,5 @@ test.describe('Verify login flow',
         await expect(loginPage.loginFormComponent.errorText,
           `The error message should contain text: ${LOGIN_PAGE_DATA.lockedUserErrorMessage}`).toContainText(LOGIN_PAGE_DATA.lockedUserErrorMessage);
       });
-    });
-
-    test('Verify login page credentials information', { tag: '@LF_003' }, async ({ loginPage }) => {
-
     });
   });
